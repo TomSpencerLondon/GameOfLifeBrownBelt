@@ -37,4 +37,24 @@ public class UniverseShould {
     CellState[][] result = universe.getState();
     assertEquals(DEAD, result[0][0]);
   }
+
+  @Test
+  void update_several_cells() {
+    Universe universe = new Universe(new CellState[][]{
+        {O, X, X},
+        {X, O, X},
+        {O, O, X},
+    });
+
+    CellState[][] expected = new CellState[][] {
+        {O, X, X},
+        {O, O, X},
+        {O, X, O}
+    };
+
+    universe.update();
+
+    CellState[][] result = universe.getState();
+    assertArrayEquals(expected, result);
+  }
 }

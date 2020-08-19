@@ -1,5 +1,7 @@
 package com.codurance;
 
+import static com.codurance.Cell.CellState.ALIVE;
+
 import com.codurance.Cell.CellState;
 
 public class Universe {
@@ -30,10 +32,39 @@ public class Universe {
   }
 
   public void update() {
+    CellState[][] cellStates = getState();
     for (int row = 0; row < state.length; row++){
       for (int col = 0; col < state[row].length; col++) {
-        state[row][col].update(0);
+        int numberOfAliveNeighbors = getNumberOfAliveNeighbors(cellStates, row, col);
+        state[row][col].update(numberOfAliveNeighbors);
       }
     }
+  }
+
+  private int getNumberOfAliveNeighbors(CellState[][] state, int row, int col) {
+    int numberOfAliveNeighbor = getNumberOfAliveNeighborsInRow(state, row - 1, col);
+    numberOfAliveNeighbor += getCountIfCellIsAlive(state, row, col - 1);
+    numberOfAliveNeighbor += getCountIfCellIsAlive(state, row, col + 1);
+    numberOfAliveNeighbor += getNumberOfAliveNeighborsInRow(state, row + 1, col);
+    return numberOfAliveNeighbor;
+  }
+
+  private int getNumberOfAliveNeighborsInRow(CellState[][] state, int row, int col) {
+    int numberOfAliveNeighbor = 0;
+    if (row >= 0 && row < state.length) {
+      numberOfAliveNeighbor += getCountIfCellIsAlive(state, row, col - 1);
+      numberOfAliveNeighbor += getCountIfCellIsAlive(state, row, col);
+      numberOfAliveNeighbor += getCountIfCellIsAlive(state, row, col + 1);
+    }
+    return numberOfAliveNeighbor;
+  }
+
+  private int getCountIfCellIsAlive(CellState[][] state, int row, int col) {
+    if (col >= 0 && col < state[row].length) {
+      if (state[row][col] == CellState.ALIVE) {
+        return 1;
+      }
+    }
+    return 0;
   }
 }
