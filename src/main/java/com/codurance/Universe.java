@@ -1,7 +1,5 @@
 package com.codurance;
 
-import static com.codurance.Cell.CellState.ALIVE;
-
 import com.codurance.Cell.CellState;
 
 public class Universe {

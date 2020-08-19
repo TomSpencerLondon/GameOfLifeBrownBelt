@@ -1,6 +1,6 @@
 package com.codurance;
 
-import static com.codurance.App.X;
+import static com.codurance.Cell.CellState.ALIVE;
 
 import com.codurance.Cell.CellState;
 
@@ -16,7 +16,7 @@ public class BoardFormatter {
     for(int j = 0; j < nextWorld.length; j++){
       StringBuilder builder = new StringBuilder();
       for(int k = 0; k < nextWorld[j].length; k++){
-        if(nextWorld[j][k] == X) {
+        if(nextWorld[j][k] == ALIVE) {
           builder.append("X");
         } else builder.append("O");
       }
