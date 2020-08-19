@@ -16,4 +16,11 @@ public class CellShould {
     assertEquals(Cell.CellState.DEAD, result);
   }
 
+  @Test
+  void die_with_zero_neighbours() {
+    Cell cell = new Cell(CellState.ALIVE);
+    CellState result = cell.getNextState();
+
+    assertEquals(CellState.DEAD, result);
+  }
 }
