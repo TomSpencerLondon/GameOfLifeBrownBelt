@@ -31,6 +31,24 @@ public class CellShould {
     assertEquals(CellState.DEAD, result);
   }
 
+  @Test
+  void become_alive_with_three_neighbours() {
+    Cell cell = new Cell(CellState.DEAD);
+
+    CellState result = cell.getNextState(3);
+
+    assertEquals(CellState.ALIVE, result);
+  }
+
+  @Test
+  void stay_dead_with_two_neighbours() {
+    Cell cell = new Cell(CellState.DEAD);
+
+    CellState result = cell.getNextState(2);
+
+    assertEquals(CellState.DEAD, result);
+  }
+
   @ParameterizedTest
   @CsvSource({
       "2",
@@ -42,23 +60,6 @@ public class CellShould {
     CellState result = cell.getNextState(neighbours);
 
     assertEquals(CellState.ALIVE, result);
-  }
-
-  @Test
-  void dead_should_become_alive_with_three_neighbours() {
-    Cell cell = new Cell(CellState.DEAD);
-
-    CellState result = cell.getNextState(3);
-
-    assertEquals(CellState.ALIVE, result);
-  }
-  @Test
-  void dead_stays_dead_with_two_neighbours() {
-    Cell cell = new Cell(CellState.DEAD);
-
-    CellState result = cell.getNextState(2);
-
-    assertEquals(CellState.DEAD, result);
   }
 
   @ParameterizedTest
