@@ -1,5 +1,6 @@
 package com.codurance;
 
+import static com.codurance.Cell.CellState.ALIVE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codurance.Cell.CellState;
@@ -25,7 +26,7 @@ public class CellShould {
       "1"
   })
   void die_with_zero_or_one_neighbours(int neighbours) {
-    Cell cell = new Cell(CellState.ALIVE);
+    Cell cell = new Cell(ALIVE);
     CellState result = cell.getNextState(neighbours);
 
     assertEquals(CellState.DEAD, result);
@@ -37,7 +38,7 @@ public class CellShould {
 
     CellState result = cell.getNextState(3);
 
-    assertEquals(CellState.ALIVE, result);
+    assertEquals(ALIVE, result);
   }
 
   @Test
@@ -55,11 +56,11 @@ public class CellShould {
       "3"
   })
   void should_live_on_with_two_or_three_neighbours(int neighbours) {
-    Cell cell = new Cell(CellState.ALIVE);
+    Cell cell = new Cell(ALIVE);
 
     CellState result = cell.getNextState(neighbours);
 
-    assertEquals(CellState.ALIVE, result);
+    assertEquals(ALIVE, result);
   }
 
   @ParameterizedTest
@@ -71,9 +72,21 @@ public class CellShould {
       "8"
   })
   void live_cell_dies_with_four_or_more_neighbours(int neighbours) {
-    Cell cell = new Cell(CellState.ALIVE);
+    Cell cell = new Cell(ALIVE);
     CellState result = cell.getNextState(neighbours);
     assertEquals(CellState.DEAD, result);
   }
 
+  @ParameterizedTest
+  @CsvSource({
+      "ALIVE",
+      "DEAD"
+  })
+  void return_its_state(String initialState) {
+    CellState input = CellState.valueOf(initialState);
+
+    Cell cell = new Cell(input);
+
+    assertEquals(input, cell.getState());
+  }
 }

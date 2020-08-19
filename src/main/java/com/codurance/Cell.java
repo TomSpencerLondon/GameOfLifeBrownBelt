@@ -7,6 +7,10 @@ public class Cell {
 
   private final CellState state;
 
+  public CellState getState() {
+    return state;
+  }
+
   public enum CellState {
     ALIVE,
     DEAD
