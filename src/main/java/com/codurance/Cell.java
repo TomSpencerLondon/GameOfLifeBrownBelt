@@ -17,7 +17,11 @@ public class Cell {
   }
 
   public CellState getNextState(int neighbours) {
-    return neighbours > 1 && neighbours < 4 ? ALIVE : DEAD;
+    if (state == ALIVE){
+      return neighbours > 1 && neighbours < 4 ? ALIVE : DEAD;
+    }else {
+      return neighbours == 3 ? ALIVE : DEAD;
+    }
   }
 
 }
