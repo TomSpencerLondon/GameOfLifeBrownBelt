@@ -67,4 +67,14 @@ public class CellShould {
     CellState result = cell.getNextState(neighbours);
     assertEquals(CellState.DEAD, result);
   }
+
+  @Test
+  void dead_should_become_alive_with_three_neighbours() {
+    Cell cell = new Cell(CellState.DEAD);
+
+    CellState result = cell.getNextState(3);
+
+    assertEquals(CellState.ALIVE, result);
+  }
+
 }
