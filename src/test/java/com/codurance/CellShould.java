@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codurance.Cell.CellState;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 // 1. Any live Cell with fewer than 2 live neighbours dies,
 // as if caused by under-population
@@ -29,7 +31,7 @@ public class CellShould {
   void die_with_one_neighbour() {
     Cell cell = new Cell(CellState.ALIVE);
 
-    CellState result = cell.getNextState(0);
+    CellState result = cell.getNextState(1);
 
     assertEquals(CellState.DEAD, result);
   }
@@ -52,10 +54,17 @@ public class CellShould {
     assertEquals(CellState.ALIVE, result);
   }
 
-  @Test
-  void live_cell_dies_with_four_neighbours() {
+  @ParameterizedTest
+  @CsvSource({
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+  })
+  void live_cell_dies_with_four_or_more_neighbours(int neighbours) {
     Cell cell = new Cell(CellState.ALIVE);
-    CellState result = cell.getNextState(4);
+    CellState result = cell.getNextState(neighbours);
     assertEquals(CellState.DEAD, result);
   }
 }
