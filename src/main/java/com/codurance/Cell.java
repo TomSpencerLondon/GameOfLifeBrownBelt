@@ -1,5 +1,8 @@
 package com.codurance;
 
+import static com.codurance.Cell.CellState.ALIVE;
+import static com.codurance.Cell.CellState.DEAD;
+
 public class Cell {
 
   private final CellState state;
@@ -14,7 +17,7 @@ public class Cell {
   }
 
   public CellState getNextState(int neighbours) {
-    return neighbours > 1 && neighbours < 4 ? CellState.ALIVE : CellState.DEAD;
+    return neighbours > 1 && neighbours < 4 ? ALIVE : DEAD;
   }
 
 }
