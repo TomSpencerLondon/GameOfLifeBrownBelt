@@ -19,19 +19,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class CellShould {
 
-  @Test
-  void die_with_zero_neighbours() {
+  @ParameterizedTest
+  @CsvSource({
+      "0",
+      "1"
+  })
+  void die_with_zero_neighbours(int neighbours) {
     Cell cell = new Cell(CellState.ALIVE);
-    CellState result = cell.getNextState(0);
-
-    assertEquals(CellState.DEAD, result);
-  }
-
-  @Test
-  void die_with_one_neighbour() {
-    Cell cell = new Cell(CellState.ALIVE);
-
-    CellState result = cell.getNextState(1);
+    CellState result = cell.getNextState(neighbours);
 
     assertEquals(CellState.DEAD, result);
   }
