@@ -13,8 +13,8 @@ public class Cell {
     this.state = state;
   }
 
-  public CellState getNextState() {
-    return CellState.DEAD;
+  public CellState getNextState(int neighbours) {
+    return neighbours > 1 && neighbours < 4 ? CellState.ALIVE : CellState.DEAD;
   }
 
 }
