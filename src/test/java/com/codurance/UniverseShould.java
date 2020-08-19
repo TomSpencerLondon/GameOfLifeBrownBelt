@@ -3,6 +3,7 @@ package com.codurance;
 import static com.codurance.Cell.CellState.ALIVE;
 import static com.codurance.Cell.CellState.DEAD;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codurance.Cell.CellState;
 import org.junit.jupiter.api.Test;
@@ -25,5 +26,15 @@ public class UniverseShould {
     CellState[][] result = universe.getState();
 
     assertArrayEquals(input, result);
+  }
+
+  @Test
+  void update_cells() {
+    Universe universe = new Universe(new CellState[][]{{X}});
+
+    universe.update();
+
+    CellState[][] result = universe.getState();
+    assertEquals(DEAD, result[0][0]);
   }
 }

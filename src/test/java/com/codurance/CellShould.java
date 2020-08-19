@@ -27,7 +27,8 @@ public class CellShould {
   })
   void die_with_zero_or_one_neighbours(int neighbours) {
     Cell cell = new Cell(ALIVE);
-    CellState result = cell.getNextState(neighbours);
+    cell.update(neighbours);
+    CellState result = cell.getState();
 
     assertEquals(CellState.DEAD, result);
   }
@@ -35,8 +36,8 @@ public class CellShould {
   @Test
   void become_alive_with_three_neighbours() {
     Cell cell = new Cell(CellState.DEAD);
-
-    CellState result = cell.getNextState(3);
+    cell.update(3);
+    CellState result = cell.getState();
 
     assertEquals(ALIVE, result);
   }
@@ -45,7 +46,9 @@ public class CellShould {
   void stay_dead_with_two_neighbours() {
     Cell cell = new Cell(CellState.DEAD);
 
-    CellState result = cell.getNextState(2);
+    cell.update(2);
+
+    CellState result = cell.getState();
 
     assertEquals(CellState.DEAD, result);
   }
@@ -58,7 +61,8 @@ public class CellShould {
   void should_live_on_with_two_or_three_neighbours(int neighbours) {
     Cell cell = new Cell(ALIVE);
 
-    CellState result = cell.getNextState(neighbours);
+    cell.update(neighbours);
+    CellState result = cell.getState();
 
     assertEquals(ALIVE, result);
   }
@@ -73,7 +77,8 @@ public class CellShould {
   })
   void live_cell_dies_with_four_or_more_neighbours(int neighbours) {
     Cell cell = new Cell(ALIVE);
-    CellState result = cell.getNextState(neighbours);
+    cell.update(neighbours);
+    CellState result = cell.getState();
     assertEquals(CellState.DEAD, result);
   }
 
