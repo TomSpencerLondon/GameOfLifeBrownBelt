@@ -15,4 +15,5 @@ public class CellShould {
 
     assertEquals(Cell.CellState.DEAD, result);
   }
+
 }
