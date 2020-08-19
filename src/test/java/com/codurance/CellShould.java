@@ -24,27 +24,22 @@ public class CellShould {
       "0",
       "1"
   })
-  void die_with_zero_neighbours(int neighbours) {
+  void die_with_zero_or_one_neighbours(int neighbours) {
     Cell cell = new Cell(CellState.ALIVE);
     CellState result = cell.getNextState(neighbours);
 
     assertEquals(CellState.DEAD, result);
   }
 
-  @Test
-  void should_live_on_with_two_neighbours() {
+  @ParameterizedTest
+  @CsvSource({
+      "2",
+      "3"
+  })
+  void should_live_on_with_two_or_three_neighbours(int neighbours) {
     Cell cell = new Cell(CellState.ALIVE);
 
-    CellState result = cell.getNextState(2);
-
-    assertEquals(CellState.ALIVE, result);
-  }
-
-  @Test
-  void should_live_on_with_three_neighbours() {
-    Cell cell = new Cell(CellState.ALIVE);
-
-    CellState result = cell.getNextState(3);
+    CellState result = cell.getNextState(neighbours);
 
     assertEquals(CellState.ALIVE, result);
   }
